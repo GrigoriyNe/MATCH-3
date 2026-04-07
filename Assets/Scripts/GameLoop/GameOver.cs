@@ -17,7 +17,7 @@ namespace GameLoop
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private Button _okButton;
         [SerializeField] private GameLoop _game;
-        [SerializeField] private ExitGame _exit;
+        [SerializeField] private Navigator.ExitGame _exit;
         [SerializeField] private Leaderboard.StepRecorder _record;
 
         private int _lastRecord;

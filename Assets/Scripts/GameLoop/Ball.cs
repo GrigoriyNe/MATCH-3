@@ -19,7 +19,7 @@ namespace GameLoop
         private DG.Tweening.Sequence _tutorialSequence;
         public int ColorId { get; private set; }
 
-        public event Action<Ball> OnBallPressed;
+        public event Action<Ball> BallPressed;
 
         private void Start()
         {
@@ -32,7 +32,7 @@ namespace GameLoop
             if (_isMoved)
                 return;
 
-            OnBallPressed?.Invoke(this);
+            BallPressed?.Invoke(this);
         }
 
         public void SetColorId(int id) =>

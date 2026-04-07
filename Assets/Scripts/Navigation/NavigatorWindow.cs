@@ -20,11 +20,11 @@ namespace Navigator
             {
                 if (isSubscribe)
                 {
-                    button.OnActivate += OnChangeScene;
+                    button.Activated += OnChangeScene;
                 }
                 else
                 {
-                    button.OnActivate -= OnChangeScene;
+                    button.Activated -= OnChangeScene;
                 }
             }
         }

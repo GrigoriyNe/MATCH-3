@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class YellowText : MonoBehaviour
+namespace Leaderboard
 {
-    public void SetYellowText()
+    public class YellowText : MonoBehaviour
     {
-        gameObject.transform.GetChild(0).GetComponent<Text>().color = Color.yellow;
-        gameObject.transform.GetChild(1).GetComponent<Text>().color = Color.yellow;
+        public void SetYellowText()
+        {
+            gameObject.transform.GetChild(0).GetComponent<Text>().color = Color.yellow;
+            gameObject.transform.GetChild(1).GetComponent<Text>().color = Color.yellow;
+        }
     }
 }

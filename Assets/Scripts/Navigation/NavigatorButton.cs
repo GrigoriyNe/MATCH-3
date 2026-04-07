@@ -9,7 +9,7 @@ namespace Navigator
         [SerializeField] private Button _activateButton;
         [SerializeField] private string _nameScene;
 
-        public event Action<string> OnActivate;
+        public event Action<string> Activated;
 
         private void OnEnable() =>
             _activateButton.onClick.AddListener(OnClick);
@@ -18,6 +18,6 @@ namespace Navigator
             _activateButton.onClick.RemoveListener(OnClick);
 
         private void OnClick() =>
-            OnActivate?.Invoke(_nameScene);
+            Activated?.Invoke(_nameScene);
     }
 }

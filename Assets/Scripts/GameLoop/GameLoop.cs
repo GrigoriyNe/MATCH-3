@@ -38,7 +38,7 @@ namespace GameLoop
             {
                 if (ball != null)
                 {
-                    ball.OnBallPressed -= OnBallClicked;
+                    ball.BallPressed -= OnBallClicked;
                 }
             }
         }
@@ -86,7 +86,7 @@ namespace GameLoop
             ball.transform.position = new Vector3(x, y, 0);
             _grid[x, y] = ball;
 
-            ball.OnBallPressed += OnBallClicked;
+            ball.BallPressed += OnBallClicked;
         }
 
         private List<Ball> FindMatches(Ball startBall)
