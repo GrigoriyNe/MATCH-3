@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
+using Unity.Burst;
 using DG.Tweening;
 
 namespace GameLoop
 {
+    [BurstCompile]
     public class Ball : MonoBehaviour
     {
         private const int LoopsRotation = 1;
 
-        [SerializeField] private float _durationAnimationMove = 0.4f;
-        [SerializeField] private float _durationAnimationsSize = 0.8f;
+        [SerializeField] private float _durationAnimationMove;
+        [SerializeField] private float _durationAnimationsSize;
         [SerializeField] private SpriteRenderer _renderer;
 
         private bool _isMoved = false;
@@ -41,9 +43,13 @@ namespace GameLoop
         public void SetColor(Color color) =>
             _renderer.color = color;
 
-        public void Explode() =>
+        public void Explode()
+        {
+            _isMoved = true;
+
             transform.DOScale(0, _durationAnimationMove)
                 .OnComplete(Destroyed);
+        }
 
         public void ShowTutorial()
         {
@@ -59,7 +65,7 @@ namespace GameLoop
         public void MoveTo(Vector3 target)
         {
             _isMoved = true;
-            
+
             transform.DOMove(target, _durationAnimationMove)
                 .OnComplete(ReadyToClick);
         }
@@ -76,6 +82,7 @@ namespace GameLoop
         private void Destroyed()
         {
             _tutorialSequence?.Kill();
+            _isMoved = false;
             Destroy(gameObject);
         }
 

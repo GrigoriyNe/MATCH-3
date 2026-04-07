@@ -12,7 +12,7 @@ namespace Leaderboard
         private const string Game = "game_";
         private const int True = 1;
 
-        private const int OffsetY = -30;
+        private const int OffsetY = -60;
 
         [SerializeField] private GameObject _canvas;
         [SerializeField] private GameObject _prefabRecord;
@@ -23,22 +23,28 @@ namespace Leaderboard
             GameObject record;
             List<RecordString> recordList = _writer.GetList();
 
-            int lastRecord = Int32.Parse(PlayerPrefs.GetString(Current));
+            if (Int32.TryParse(PlayerPrefs.GetString(Current), out int lastRecord) == false)
+            {
+                lastRecord = 0;
+            }
+
             int j = 0;
 
             while (PlayerPrefs.HasKey(Game + j))
             {
-                record = Instantiate(_prefabRecord, new Vector2(0, 0 + (OffsetY * j)), Quaternion.identity);
-                record.transform.SetParent(_canvas.transform, false);
-
-                record.transform.GetChild(0).GetComponent<Text>().text = recordList[j].Date.ToString();
-                record.transform.GetChild(1).GetComponent<Text>().text = recordList[j].Record.ToString();
-
-                if (recordList[j].Record == lastRecord && PlayerPrefs.GetInt(IsRecord) == True)
+                if (recordList.Count > j)
                 {
-                    record.transform.GetComponent<YellowText>().SetYellowText();
-                }
+                    record = Instantiate(_prefabRecord, new Vector2(0, 0 + (OffsetY * j)), Quaternion.identity);
+                    record.transform.SetParent(_canvas.transform, false);
 
+                    record.transform.GetChild(0).GetComponent<Text>().text = recordList[j].Date.ToString();
+                    record.transform.GetChild(1).GetComponent<Text>().text = recordList[j].Record.ToString();
+
+                    if (recordList[j].Record == lastRecord && PlayerPrefs.GetInt(IsRecord) == True)
+                    {
+                        record.transform.GetComponent<YellowText>().SetYellowText();
+                    }
+                }
                 j++;
             }
         }

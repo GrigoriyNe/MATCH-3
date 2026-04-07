@@ -22,7 +22,7 @@ namespace GameLoop
 
         private int _lastRecord;
 
-        private void Awake()
+        private void Start()
         {
             PlayerPrefs.SetInt("iSRecord", 0);
             _lastRecord = Int32.Parse(PlayerPrefs.GetString(Current));
@@ -35,6 +35,7 @@ namespace GameLoop
             _game.StepsChanged -= OnMoves;
             _okButton.onClick.AddListener(OpenMenu);
         }
+
         private void OpenMenu() =>
             SceneManager.LoadScene(Menu);
 

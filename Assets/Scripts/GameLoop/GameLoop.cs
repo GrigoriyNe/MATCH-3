@@ -63,8 +63,8 @@ namespace GameLoop
                 _stepsLeft--;
             }
 
-            StepsChanged?.Invoke(_stepsLeft);
             ShiftBallsDown();
+            StepsChanged?.Invoke(_stepsLeft);
         }
 
         private void InitializeGrid()
@@ -154,13 +154,13 @@ namespace GameLoop
 
         private void ProcessMatches(List<Ball> matches)
         {
+            _stepsLeft += matches.Count - StepOffset;
+
             foreach (Ball ball in matches)
             {
                 _grid[GetGridX(ball), GetGridY(ball)] = null;
                 ball.Explode();
             }
-
-            _stepsLeft += matches.Count - StepOffset;
         }
 
         private void ShiftBallsDown()
